@@ -1,24 +1,15 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a learning project for pure API implementation in Ruby on Rails
 
-Things you may want to cover:
+Project idea is to create an API for Elden Ring Nightreign that will have data about all Weapons and Bosses in aforementioned game.
 
-* Ruby version
 
-* System dependencies
+# During this project I will improve my skills in
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+* API authentication
+* Caching - Redis
+* Elasticsearch
+* Pagination
+* Error handling
+* RSpec
