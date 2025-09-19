@@ -2,7 +2,8 @@ source "https://rubygems.org"
 
 gem "rails", "~> 8.0.2", ">= 8.0.2.1"
 gem "propshaft"
-gem "sqlite3", ">= 2.1"
+# gem "sqlite3", ">= 2.1"
+gem "pg"
 gem "puma", ">= 5.0"
 gem "importmap-rails"
 gem "turbo-rails"
@@ -22,6 +23,8 @@ gem "bootsnap", require: false
 gem "kamal", require: false
 
 gem "thruster", require: false
+
+gem "dotenv-rails", groups: [:development, :test]
 
 
 group :development, :test do
