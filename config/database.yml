@@ -1,6 +1,6 @@
 default: &default
   adapter: postgresql
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 10 } %>
   timeout: 5000
   username: <%= ENV['DB_USERNAME']%>
   password: <%= ENV['DB_PASSWORD']%>
@@ -9,18 +9,18 @@ default: &default
 
 development:
   <<: *default
-  schema_search_path: dev
+  schema_search_path: dev, public
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  schema_search_path: test
+  schema_search_path: test, public
 
 
 # Store production database in the storage/ directory, which by default
 # is mounted as a persistent Docker volume in config/deploy.yml.
 production:
     <<: *default
-    schema_search_path: prod
+    schema_search_path: prod, public
