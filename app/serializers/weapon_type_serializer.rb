@@ -1,4 +1,3 @@
 class WeaponTypeSerializer < ActiveModel::Serializer
-  attributes :id
-  attributes :name, :category
+  attributes :id, :name, :category
 end
