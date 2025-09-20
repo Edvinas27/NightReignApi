@@ -1,10 +1,15 @@
 class WeaponsController < ApplicationController
 
   def index
-    result = GetWeapons.call
+    result = Rails.cache.read("all_weapons")
 
-    if result.success?
-      render json: result.weapons, status: :ok
+    unless result
+      GetAllWeaponsJob.perform_now
+      result = Rails.cache.read("all_weapons")
+    end
+
+    if result.present?
+      render json: result, status: :ok
     end
   end
 
