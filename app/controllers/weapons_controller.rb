@@ -51,8 +51,7 @@ class WeaponsController < ApplicationController
       :weapon_type_id,
       :level_requirement,
       :quality_id,
-      weapon_attack_stats_attributes: [:stat_type, :value],
-      weapon_guard_stats_attributes: [:stat_type, :value]
+      stats: [ { attack: DefaultWeaponStats::ATTACK_STAT_TYPES }, { guard: DefaultWeaponStats::GUARD_STAT_TYPES } ]
       )
     rescue ActionController::ParameterMissing => e
       render json: { error: e.message }, status: :unprocessable_entity

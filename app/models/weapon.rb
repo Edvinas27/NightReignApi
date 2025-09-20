@@ -1,13 +1,25 @@
 class Weapon < ApplicationRecord
   belongs_to :quality
   belongs_to :weapon_type
-  has_many :weapon_attack_stats, dependent: :destroy
-  has_many :weapon_guard_stats, dependent: :destroy
-
-  accepts_nested_attributes_for :weapon_attack_stats, allow_destroy: true
-  accepts_nested_attributes_for :weapon_guard_stats, allow_destroy: true
 
   validates :name, :level_requirement, presence: true
-  validates :weapon_attack_stats, length: { is: DefaultWeaponStats::ATTACK_STAT_TYPES.size, message: "Must have exactly #{DefaultWeaponStats::ATTACK_STAT_TYPES.size} stats" }
-  validates :weapon_guard_stats, length: { is: DefaultWeaponStats::GUARD_STAT_TYPES.size, message: "Must have exactly #{DefaultWeaponStats::GUARD_STAT_TYPES.size} stats" }
+  validate :validate_stats
+
+  def attack_stats
+    stats["attack"] || {}
+  end
+
+  def guard_stats
+    stats["guard"] || {}
+  end
+
+  private
+
+  def validate_stats
+    missing_attack = DefaultWeaponStats::ATTACK_STAT_TYPES - attack_stats.keys
+    missing_guard = DefaultWeaponStats::GUARD_STAT_TYPES - guard_stats.keys
+
+    errors.add(:stats, "missing attack stats: #{missing_attack.join(', ')}") if missing_attack.any?
+    errors.add(:stats, "missing guard stats: #{missing_guard.join(', ')}") if missing_guard.any?
+  end
 end

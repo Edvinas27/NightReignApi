@@ -2,7 +2,8 @@ class GetWeapon
   include Interactor
 
   def call
-    weapon = Weapon.find_by(id: context.id)
+    weapon = Weapon.preload(:weapon_type, :quality)
+                   .find_by(id: context.id)
     if weapon
       context.weapon = weapon
     else

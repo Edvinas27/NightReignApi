@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_19_145702) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_20_100644) do
   create_schema "auth"
   create_schema "dev"
   create_schema "extensions"
@@ -37,24 +37,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_19_145702) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "weapon_attack_stats", force: :cascade do |t|
-    t.integer "weapon_id", null: false
-    t.string "stat_type"
-    t.integer "value", default: 0, null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["weapon_id"], name: "index_weapon_attack_stats_on_weapon_id"
-  end
-
-  create_table "weapon_guard_stats", force: :cascade do |t|
-    t.integer "weapon_id", null: false
-    t.string "stat_type"
-    t.integer "value"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["weapon_id"], name: "index_weapon_guard_stats_on_weapon_id"
-  end
-
   create_table "weapon_types", force: :cascade do |t|
     t.string "name"
     t.string "category"
@@ -69,12 +51,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_19_145702) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "weapon_type_id", null: false
+    t.jsonb "stats", default: {}, null: false
     t.index ["quality_id"], name: "index_weapons_on_quality_id"
     t.index ["weapon_type_id"], name: "index_weapons_on_weapon_type_id"
   end
 
-  add_foreign_key "weapon_attack_stats", "weapons"
-  add_foreign_key "weapon_guard_stats", "weapons"
   add_foreign_key "weapons", "qualities"
   add_foreign_key "weapons", "weapon_types"
 end
