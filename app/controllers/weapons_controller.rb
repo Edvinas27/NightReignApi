@@ -1,15 +1,9 @@
 class WeaponsController < ApplicationController
 
   def index
-    result = Rails.cache.read("all_weapons")
-
-    unless result
-      GetAllWeaponsJob.perform_now
-      result = Rails.cache.read("all_weapons")
-    end
-
-    if result.present?
-      render json: result, status: :ok
+    result = GetWeapons.call(params: params)
+    if result.success?
+      render json: result.weapons, status: :ok
     end
   end
 
@@ -24,7 +18,6 @@ class WeaponsController < ApplicationController
 
   def create
     result = CreateWeapon.call(params: weapon_params)
-
     if result.success?
       render json: result.weapon, status: :created
     else
@@ -34,7 +27,6 @@ class WeaponsController < ApplicationController
 
   def update
     result = UpdateWeapon.call(id: params[:id], params: weapon_params)
-
     if result.success?
       render json: result.weapon, status: :ok
     else
