@@ -17,6 +17,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_20_130054) do
   create_schema "graphql"
   create_schema "graphql_public"
   create_schema "pgbouncer"
+  create_schema "prod"
   create_schema "realtime"
   create_schema "storage"
   create_schema "test"
@@ -46,11 +47,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_20_130054) do
 
   create_table "weapons", force: :cascade do |t|
     t.string "name", null: false
-    t.integer "quality_id", null: false
     t.integer "level_requirement", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "weapon_type_id", null: false
+    t.bigint "quality_id", null: false
+    t.bigint "weapon_type_id", null: false
     t.jsonb "stats", default: {}, null: false
     t.index ["quality_id"], name: "index_weapons_on_quality_id"
     t.index ["weapon_type_id"], name: "index_weapons_on_weapon_type_id"
