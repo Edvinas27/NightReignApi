@@ -4,7 +4,7 @@ module Weapons
 
     def call
       weapon = Weapon.find_by(id: context.id)
-        weapon.destroy! if weapon
+        weapon.destroy if weapon
     end
   end
 end

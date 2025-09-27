@@ -1,10 +1,10 @@
-class WeaponsController < ApplicationController
+class Api::V1::WeaponsController < ApiController
   include SerializeCollection
   def index
     result = Weapons::Index.call(params: params)
       pagy, weapons = pagy(result.weapons, limit: params[:limit], page: params[:page])
       render json: { weapons: serialize_collection(weapons, WeaponSerializer),
-                     pagy: pagy_metadata(pagy) }, status: :ok
+                     meta: pagy_metadata(pagy) }, status: :ok
   end
 
   def show
