@@ -6,3 +6,5 @@ class QualitiesController < ApplicationController
     end
   end
 end
+
+# this will be deleted
