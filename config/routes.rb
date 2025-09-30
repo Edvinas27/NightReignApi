@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
   namespace :api do
+    namespace :admin do
+      post 'auth', to: 'auth#create'
+    end
     namespace :v1 do
       resources :weapons
     end

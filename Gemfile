@@ -12,6 +12,7 @@ gem "jbuilder"
 gem 'interactor-rails', '~> 2.3'
 gem 'active_model_serializers', '~> 0.10.15'
 gem 'pagy', '~> 9.4'
+gem 'jwt', '~> 3.1', '>= 3.1.2'
 
 gem "tzinfo-data", platforms: %i[ windows jruby ]
 
