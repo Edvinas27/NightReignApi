@@ -2,7 +2,7 @@ require 'rails_helper'
 RSpec.describe Weapons::Create do
   describe '#call' do
     context 'with valid parameters' do
-      it 'creates a new weapon' do
+      it 'creates a new record' do
         weapon_type = FactoryBot.create(:weapon_type)
         quality = FactoryBot.create(:quality)
         params = {
@@ -21,7 +21,7 @@ RSpec.describe Weapons::Create do
     end
     context 'with invalid parameters' do
       let(:invalid_params) { { name: "" } }
-      it 'fails to create a weapon and raises RecordInvalid' do
+      it 'raises RecordInvalid' do
         expect {
           described_class.call(params: invalid_params)
         }.to raise_error(ActiveRecord::RecordInvalid)
